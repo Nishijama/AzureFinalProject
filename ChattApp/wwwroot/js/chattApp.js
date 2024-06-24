@@ -5,17 +5,25 @@
     const userMessages = document.getElementById("user-messages");
     
     btnSend.addEventListener("click", async ()=> {
-        const message = userMessage.value;
-        console.log(message);
-        if (!message || message ==='')
-            return;
-        try {
-            await connection.invoke("SendMessage", {message: message, userName: currentUser});
-            userMessage.value = ('');
-        } catch (err) {
-            console.error(err)
-        }
-    })
+        sendData();
+    });
+    document.addEventListener("keypress", async (e)=> {
+        if(e.key ==='Enter')
+            sendData();
+    });
+    
+    async function sendData() {
+            const message = userMessage.value;
+            console.log(message);
+            if (!message || message ==='')
+                return;
+            try {
+                await connection.invoke("SendMessage", {message: message, userName: currentUser});
+                userMessage.value = ('');
+            } catch (err) {
+                console.error(err)
+            }
+    }
     
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/chat")
