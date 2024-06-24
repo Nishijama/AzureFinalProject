@@ -1,8 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IndexVm
+@{
+    ViewData["Title"] = "ChattApp";
+    var userName = Model.UserName;
 }
 
+<input hidden id="user" value="@userName">
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome @userName!</h1>
 </div>
+<div class="row">
+    <div class="col-12 py-3">
+        <div class="form-control" id="chat-window"></div>
+    </div>
+    <div class="col-12">
+        <input placeholder="message" class="form-control" id="user-message">
+    </div>
+    <div class="col-md-3 offset-md-9 col-12 py-3">
+        <button class="btn btn-primary w-100" id="button-send">Send</button>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="js/chattApp.js"></script>
+}
