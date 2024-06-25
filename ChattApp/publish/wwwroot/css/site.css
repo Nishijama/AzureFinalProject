@@ -1,0 +1,63 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  height: 100vh;
+}
+
+#chat-window {
+  height: 400px; /* Set the height you want */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+}
+
+.message-element {
+  max-width: 60%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  position: relative;
+  word-wrap: break-word;
+}
+.message-element.user {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+}
+.message-element.other {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+}
+.message-element::after {
+  content: "";
+  position: absolute;
+  border-width: 10px;
+  border-style: solid;
+}
+.message-element.user::after {
+  border-color: transparent transparent transparent #dcf8c6;
+  top: 10px;
+  right: -10px;
+}
+.message-element.other::after {
+  border-color: transparent #f1f0f0 transparent transparent;
+  top: 10px;
+  left: -10px;
+}

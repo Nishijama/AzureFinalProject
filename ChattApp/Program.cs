@@ -1,6 +1,10 @@
+using ChattApp;
 using ChattApp.Hub;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("chattAppDb");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -14,6 +18,10 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddSignalR();
+builder.Services.AddDbContext<ChattAppDb>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 #if DEBUG
 mvc.AddRazorRuntimeCompilation();
