@@ -2,8 +2,8 @@ using ChattApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ChattApp
-{
+namespace ChattApp;
+
     public class ChattAppDb : DbContext
     {
         public ChattAppDb(DbContextOptions<ChattAppDb> options) : base(options)
@@ -30,5 +30,5 @@ namespace ChattApp
                 .IsRequired()
                 .HasDefaultValueSql("getutcdate()");  // Default to current UTC time if not set explicitly.
         }
+    public DbSet<ChattMessage> Messages { get; protected set; }
     }
-}
