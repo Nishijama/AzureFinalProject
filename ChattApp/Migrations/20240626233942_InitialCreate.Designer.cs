@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChattApp.Migrations
 {
     [DbContext(typeof(ChattAppDb))]
-    [Migration("20240625212816_InitMigration")]
-    partial class InitMigration
+    [Migration("20240626233942_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,14 +42,52 @@ namespace ChattApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Message", (string)null);
+                });
+
+            modelBuilder.Entity("ChattApp.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("MessageId");
+                    b.HasKey("UserId");
 
-                    b.ToTable("Message", (string)null);
+                    b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("ChattApp.Models.ChattMessage", b =>
+                {
+                    b.HasOne("ChattApp.Models.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ChattApp.Models.User", b =>
+                {
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

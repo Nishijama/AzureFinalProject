@@ -18,7 +18,7 @@
         if (!message || message === '')
             return;
         try {
-            await connection.invoke("SendMessage", { message: message, userName: currentUser });
+            await connection.invoke("SendMessage", { message: message });
             userMessage.value = '';
         } catch (err) {
             console.error(err);
@@ -45,10 +45,6 @@
     });
 
     connection.on("ReceiveMessage", (data) => {
-        appendMessage(data);
-    });
-
-    function appendMessage(data) {
         const { userName, message, formattedCreatedOn } = data;
 
         const parsedDate = new Date(formattedCreatedOn.split(", ")[0]);
@@ -66,25 +62,54 @@
 
         const message_el = document.createElement("div");
 
-        message_el.classList.add("message-element");
+        message_el.classList.add("message-element")
         if (currentUser === userName) {
-            message_el.classList.add("user");
+            message_el.classList.add("user")
         } else {
-            message_el.classList.add("other");
+            message_el.classList.add("other")
         }
         message_el.appendChild(msgHeader);
         message_el.appendChild(message_text_el);
 
         chatWindow.appendChild(message_el);
+
         chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
+    });
 
-    // Append initial messages to the chat window
-    if (initialMessages) {
-        initialMessages.forEach(appendMessage);
-    }
+    // Load initial messages
+    const initialMessages = JSON.parse(document.getElementById('initial-messages').value);
+    initialMessages.forEach(data => {
+        const { userName, message, formattedCreatedOn } = data;
 
-    // Start the connection
+        const parsedDate = new Date(formattedCreatedOn.split(", ")[0]);
+        const currentDate = new Date();
+        const msgHeader = document.createElement('p');
+
+        if (isSameDate(parsedDate, currentDate)) {
+            msgHeader.innerHTML = `<strong>${userName}</strong> -- ${formattedCreatedOn.split(", ")[1]}`;
+        } else {
+            msgHeader.innerHTML = `<strong>${userName}</strong> -- ${formattedCreatedOn.split(", ")[0]}`;
+        }
+
+        const message_text_el = document.createElement('p');
+        message_text_el.innerHTML = `${message}`;
+
+        const message_el = document.createElement("div");
+
+        message_el.classList.add("message-element")
+        if (currentUser === userName) {
+            message_el.classList.add("user")
+        } else {
+            message_el.classList.add("other")
+        }
+        message_el.appendChild(msgHeader);
+        message_el.appendChild(message_text_el);
+
+        chatWindow.appendChild(message_el);
+
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    });
+
     start();
 })();
 

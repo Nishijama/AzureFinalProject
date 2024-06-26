@@ -1,7 +1,8 @@
 using ChattApp;
 using ChattApp.Hub;
+using ChattApp.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("chattAppDb");
@@ -23,6 +24,12 @@ builder.Services.AddDbContext<ChattAppDb>(options =>
     options.UseSqlServer(connectionString);
 });
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";
+    });
+
 #if DEBUG
 mvc.AddRazorRuntimeCompilation();
 #endif
@@ -42,6 +49,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();

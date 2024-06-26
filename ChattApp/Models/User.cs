@@ -1,17 +1,25 @@
-using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChattApp.Models
 {
     public class User
     {
+        public User()
+        {
+            Messages = new HashSet<ChattMessage>();
+        }
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+
         [Required]
+        [MaxLength(30)]
         public string UserName { get; set; }
+
         [Required]
         public string PasswordHash { get; set; }
+
+        public ICollection<ChattMessage> Messages { get; set; }  // Navigation property
     }
 }
