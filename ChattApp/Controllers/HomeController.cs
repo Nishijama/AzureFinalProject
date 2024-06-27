@@ -35,6 +35,7 @@ namespace ChattApp.Controllers
                 .Include(m => m.User)
                 .OrderByDescending(m => m.CreatedOn)
                 .Take(10)
+                .OrderBy(m => m.CreatedOn)
                 .ToListAsync();
 
             var vm = new IndexVm
