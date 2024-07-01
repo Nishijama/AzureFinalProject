@@ -34,6 +34,13 @@ namespace ChattApp.Controllers
                 return View(vm);
             }
 
+            var existingUser = _context.Users.SingleOrDefault(u => u.UserName == vm.UserName);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("UserName", "Username already exists. Please choose another one.");
+                return View(vm);
+            }
+
             var user = new User
             {
                 UserName = vm.UserName,

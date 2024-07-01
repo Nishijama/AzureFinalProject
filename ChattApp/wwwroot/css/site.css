@@ -8,6 +8,16 @@ html {
   }
 }
 
+.text-danger ul {
+  padding: 0;
+  margin: 0;
+}
+
+.text-danger li {
+  list-style-type: none;
+  text-align: center;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -17,13 +27,21 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-  height: 100vh;
+.row {
+  height: 80vh;
+}
+
+#chat-window-wrapper{
+  height: 65vh;
+  
+}
+
+#message-wrapper {
+  height: 15vh;
 }
 
 #chat-window {
-  height: 400px; /* Set the height you want */
+  height: 100%; /* Set the height you want */
   overflow-y: scroll; /* Enable vertical scrolling */
   display: flex;
   flex-direction: column;
