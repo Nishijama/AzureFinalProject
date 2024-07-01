@@ -1,6 +1,6 @@
 # Projekt końcowy na przedmiot Systemy i platformy zarządzania treścią
-Moduł IoT and Cloud Computing
-Demo aplikacji: https://youtu.be/CL45SZMyNtc
+Moduł IoT and Cloud Computing 
+### Demo aplikacji: https://youtu.be/CL45SZMyNtc
 
 Aplikacja chatu grupowego oparta o tutoriale wykładowcy z kanału: https://www.youtube.com/@developerlifepl
 
