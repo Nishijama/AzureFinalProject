@@ -23,4 +23,6 @@ Chat posiada następujące funkcjonalności:
 
 ![Azure_Config](Screenshots/ChattApp_Azure.png)
 
-![DB_Config](Screenshots/ChattApp_DB.png)
+![DB_Messages](Screenshots/ChattApp_DB_m.png)
+
+![DB_Users](Screenshots/ChattApp_DB.png)
