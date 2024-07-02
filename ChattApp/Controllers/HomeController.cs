@@ -34,7 +34,7 @@ namespace ChattApp.Controllers
             var messages = await _context.Messages
                 .Include(m => m.User)
                 .OrderByDescending(m => m.CreatedOn)
-                .Take(10)
+                .Take(50)
                 .OrderBy(m => m.CreatedOn)
                 .ToListAsync();
 
