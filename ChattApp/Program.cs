@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("chattAppDb");
 
 // Add services to the container.
+builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.AddControllersWithViews();
 var mvc = builder.Services.AddControllersWithViews();
 
